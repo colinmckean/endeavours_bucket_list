@@ -121,7 +121,7 @@ var populateResults = function(countries){
 
   button.onclick = function(){
 
-    var country = new Country({name: countries[0].name,capital: countries[0].capital});
+    var country = new Country({name: countries[0].name, capital: countries[0].capital, population: countries[0].population});
     makePostRequest('http://localhost:3000/api/bucket_list ',requestComplete, country);
     console.log("clicked");
   }
@@ -155,6 +155,8 @@ window.onload = app;
 
 var Country = function(options){
   this.name = options.name;
+  this.population = options.population;
+  this.capital = options.capital;
 }
 
 module.exports = Country;

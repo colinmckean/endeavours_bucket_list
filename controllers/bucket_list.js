@@ -20,7 +20,7 @@ bucketRouter.get('/', function(req, res){
 
 bucketRouter.post('/', function(req, res){
   
-  console.log(Object.keys(req.body)[0]);
+  console.log(Object.keys(req.body));
   var country = JSON.parse(Object.keys(req.body)[0])
   // var country = new Country({
   //   name: req.body
