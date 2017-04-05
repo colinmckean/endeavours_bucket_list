@@ -68,9 +68,86 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Country = __webpack_require__(1);
+
+var makeRequest = function(url, callback){
+  var request = new XMLHttpRequest();
+  request.open("GET", url);
+  request.onload = callback;
+  request.send();
+};
+
+var makePostRequest = function(url, callback, payload){
+
+  console.log(payload);
+  var request = new XMLHttpRequest();
+  request.open("POST", url);
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.onload = callback;
+  request.send(payload);
+};
+
+var requestComplete = function(){
+  if(this.status !== 200){
+    return;
+  }
+  var jsonString = this.responseText;
+  var countries = JSON.parse(jsonString);
+ 
+ populateResults(countries);
+  
+};
+
+var populateResults = function(countries){
+  var name = document.createElement('h2');
+  name.innerText = countries[0].name;
+  var container = document.querySelector("#searchResult");
+  container.innerHTML = '';
+  container.appendChild(name);
+
+  var button = document.createElement('button');
+
+
+  button.onclick = function(){
+    var country = new Country({name: "does this work"});
+    makePostRequest('http://localhost:3000/api/bucket_list ',requestComplete, country);
+    console.log("clicked");
+  }
+  container.appendChild(button);
+  // console.log(countries[0]);
+}
+
+
+
+
+
+var app = function(){
+
+  var urlCountry = "https://restcountries.eu/rest/v2/name/";
+  
+  var query = document.querySelector('#search-query');
+  query.onkeypress = function(e){
+    if(e.which === 13){
+      makeRequest(urlCountry + query.value, requestComplete);
+    }
+  }
+
+
+
+}
+window.onload = app;
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports) {
 
+var Country = function(options){
+  this.name = options.name;
+}
 
+module.exports = Country;
 
 /***/ })
 /******/ ]);
