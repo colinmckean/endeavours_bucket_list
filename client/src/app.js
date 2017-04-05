@@ -26,7 +26,7 @@ var makePostRequest = function(url, callback, payload){
   console.log(payload);
   var request = new XMLHttpRequest();
   request.open("POST", url);
-  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.setRequestHeader("Content-type", "application/json");
   // request.onload = callback; // this will be call back for populate bucket list.
   console.log(payload);
   request.send(JSON.stringify(payload));
