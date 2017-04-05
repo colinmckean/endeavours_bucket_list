@@ -13,8 +13,9 @@ var makePostRequest = function(url, callback, payload){
   var request = new XMLHttpRequest();
   request.open("POST", url);
   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  request.onload = callback;
-  request.send(payload);
+  // request.onload = callback; // this will be call back for populate bucket list.
+  console.log(payload);
+  request.send(JSON.stringify(payload));
 };
 
 var requestComplete = function(){
@@ -36,6 +37,7 @@ var populateResults = function(countries){
   container.appendChild(name);
 
   var button = document.createElement('button');
+  button.innerText = "add to bucket list!";
 
 
   button.onclick = function(){

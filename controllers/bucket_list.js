@@ -19,11 +19,12 @@ bucketRouter.get('/', function(req, res){
 
 
 bucketRouter.post('/', function(req, res){
-
-  console.log(req.body);
-  var country = new Country({
-    name: req.body.name
-  });
+  
+  console.log(Object.keys(req.body)[0]);
+  var country = JSON.parse(Object.keys(req.body)[0])
+  // var country = new Country({
+  //   name: req.body
+  // });
 
   query.add(country, function(results){
     res.json(results);
